@@ -92,4 +92,4 @@ member = ['<@494651899497152539>']
     #print(member)
 
 
-client.run('NzY1NjExNTk3MTM2NjU4NDkz.X4XVXQ.G9RwdpyObRTpmVMhz0TNFdBIyYo')
+client.run('TOKEN')
