@@ -2,21 +2,28 @@ import discord
 from discord.ext import commands
 import random
 
+intents = discord.Intents.default()
+intents.members = True
 
-client = commands.Bot(command_prefix = '?')
+bot = commands.Bot(command_prefix = '?', intents=intents)
 #creates embed. ^is the prefix
 frog = discord.Embed(title=':frog: Kermit :frog:')
 poster = discord.Embed(title=':dollar: *CASH PRIZE* :dollar:')
+monkee = discord.Embed(title= ':banana: :monkey: M O N K E')
 
-@client.event 
+@bot.event 
 async def on_ready():
     print("Bot Online!")
-    print(client.user.name)
-    print(client.user.id)
-    print('---------------')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
 
 
-@client.command()
+@bot.command()
+async def kermit_help(ctx):
+    await ctx.send('Commands: \n?kermit, \n?wanted, \n?monke')
+
+@bot.command()
 async def kermit(ctx):
     await ctx.send('Fetching Kermit...')
     #Kermit pictures below
@@ -41,7 +48,7 @@ async def kermit(ctx):
     #below sends embed
     await ctx.send(embed=frog)
 
-@client.command()
+@bot.command()
 async def wanted(ctx):
     await ctx.send('Fetching Your Poster...')
         #Wanted posters
@@ -74,22 +81,18 @@ async def wanted(ctx):
     
     await ctx.send(embed=poster)
 
-#members = ['<@494651899497152539>', '<@463145764332240918>', '<@485234901449179147>', '<@555195019481448466>', '<@499665907036192798>', '<@459513668166483969>']
+@bot.command()
+async def monke(ctx):
+    #monke gif(find way to make actual video at some point)
+    #https://cdn.discordapp.com/attachments/806920676371333221/823637617525653544/gorilla.mp4
+    monkee.set_image(url='https://media.giphy.com/media/IbGi9aRgaIWzm0WlaB/giphy.gif')
 
-member = ['<@494651899497152539>']
+    await ctx.send(embed=monkee)
 
-#async def on_member_join(member):
-    #await member.send('This server built different...\nalso read the rules')
-    #member.append(member.user.id)
-
-#@client.event
-#async def on_member_remove(member):
-    #member.remove(member.user.id)
-
-#@client.command()
-#async def FU(ctx):
-    #await ctx.send(f'Fuck You {(random.choice(member))}')
-    #print(member)
+@bot.event
+async def on_member_join(member):
+    await member.send('This server built different\n...\nalso read the rules')
 
 
-client.run('TOKEN')
+
+bot.run('NzY1NjExNTk3MTM2NjU4NDkz.X4XVXQ.-y6Itn3rskLtwItUfpEhlVjei20')
